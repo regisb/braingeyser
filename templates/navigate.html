@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if directories %}
+    <ul>
+        {% for directory in directories %}
+        <li><a href="{{ url_for('navigate', root=directory['path']) }}">{{ directory['name'] }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    {% if videos %}
+    <ul>
+        {% for video in videos %}
+        <li><a href="{{ url_for('video', src=video['path']) }}">{{ video['name'] }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

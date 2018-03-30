@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<!--http://videojs.com/getting-started/-->
+<video id="braingeyser" class="video-js" controls preload="auto" width="800px" data-setup='{"persistTextTrackSettings": true}'>
+<!--<video class="video-js" controls preload="auto" width="800px" data-setup='{}'>-->
+    <source src="/data/{{ src }}" type='video/mp4'>
+    {% for subtitle in subtitles %}
+    <track kind="captions" src="{{ url_for('track', src=subtitle['path']) }}" label="{{ subtitle['name'] }}" {% if loop.first %}default{% endif %}>
+    {% endfor %}
+</video>
+
+{% if subtitles %}
+<p>Subtitles:</p>
+<ul>
+    {% for subtitle in subtitles %}
+    <li>{{ subtitle['name'] }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+<script>
+    let player = videojs('braingeyser');
+    player.ready(function(){
+        var settings = this.textTrackSettings;
+        settings.setValues({
+            "backgroundColor": "#000",
+            "backgroundOpacity": "0",
+            "edgeStyle": "uniform",
+        });
+        settings.updateDisplay();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Braingeyser &#127754; The lightweight video streamer</title>
+        <link href="{{ url_for('static', filename='video-js.css') }}" rel="stylesheet">
+        <!--background-color: rgb(0, 0, 0, 0);-->
+        <!--text-shadow: rgb(34, 34, 34) 0px 0px 4px, rgb(34, 34, 34) 0px 0px 4px, rgb(34, 34, 34) 0px 0px 4px, rgb(34, 34, 34) 0px 0px 4px;-->
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+        <script src="{{ url_for('static', filename='video.js') }}"></script>
+        {% block footer %}{% endblock %}
+    </body>
+</html>
