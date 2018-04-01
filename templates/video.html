@@ -3,17 +3,19 @@
 <!--http://videojs.com/getting-started/-->
 <video id="braingeyser" class="video-js" controls preload="auto" width="800px" data-setup='{"persistTextTrackSettings": true}'>
 <!--<video class="video-js" controls preload="auto" width="800px" data-setup='{}'>-->
-    <source src="/data/{{ src }}" type='video/mp4'>
+    <source src="/data/{{ video['path'] }}" type='video/mp4'>
     {% for subtitle in subtitles %}
     <track kind="captions" src="{{ url_for('track', src=subtitle['path']) }}" label="{{ subtitle['name'] }}" {% if loop.first %}default{% endif %}>
     {% endfor %}
 </video>
 
+<p><a href="{{ url_for('data', src=video['path']) }}"><i class="fas fa-download"></i>{{ video['name'] }}</a></p>
+
 {% if subtitles %}
-<p>Subtitles:</p>
+<h3>Subtitles</h3>
 <ul>
     {% for subtitle in subtitles %}
-    <li>{{ subtitle['name'] }}</li>
+    <li><a href="{{ url_for('data', src=subtitle['path']) }}"><i class="fas fa-download"></i> {{ subtitle['name'] }}</a></li>
     {% endfor %}
 </ul>
 {% endif %}

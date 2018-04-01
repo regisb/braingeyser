@@ -49,6 +49,10 @@ def navigate(root=''):
 def video(src):
     root = os.path.dirname(src)
     absolute_root = os.path.join(Videos.ROOT_DIR, root)
+    target = {
+        'name': os.path.basename(src),
+        'path': src,
+    }
 
     # Find subtitles
     # (we don't use glob because it does not work with '[' characters in the path name)
@@ -62,7 +66,7 @@ def video(src):
             'path': os.path.join(root, subtitle_name)
         })
 
-    return render_template('video.html', src=src, subtitles=subtitles)
+    return render_template('video.html', video=target, subtitles=subtitles)
 
 @app.route('/data/<path:src>')
 def data(src):
