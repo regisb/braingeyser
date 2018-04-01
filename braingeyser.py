@@ -3,6 +3,7 @@
 import argparse
 import os
 
+import chardet
 from flask import Flask, render_template, redirect, url_for, send_from_directory
 import pycaption
 
@@ -80,7 +81,14 @@ def convert_to_vtt(path):
     Convert a subtitles file from any format (e.g: srt) to vtt. This is
     necessary for use with videojs, which supports only vtt subtitles.
     """
-    caps = open(path).read()
+    caps = open(path, 'rb').read()
+    try:
+        caps = caps.decode('utf8')
+    except UnicodeDecodeError:
+        # Attempt to read with custom encoding
+        detected = chardet.detect(caps)
+        caps = caps.decode(detected['encoding'])
+
     caps = caps.strip("\ufeff").strip("\n").strip("\r")
     sub_reader = pycaption.detect_format(caps)
     if sub_reader is None:
