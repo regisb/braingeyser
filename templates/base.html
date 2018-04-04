@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Braingeyser &#127754; The lightweight video streamer</title>
         <link href="{{ url_for('static', filename='video-js.css') }}" rel="stylesheet">
         <script src="{{ url_for('static', filename='fontawesome.js') }}"></script>
@@ -12,6 +13,9 @@
             #content {
                 margin: auto;
                 max-width: 800px;
+            }
+            li, p {
+                word-wrap: break-word;
             }
         </style>
     </head>
