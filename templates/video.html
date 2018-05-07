@@ -5,7 +5,7 @@
 <!--<video class="video-js" controls preload="auto" width="800px" data-setup='{}'>-->
     <source src="/data/{{ video['path'] }}" type='video/mp4'>
     {% for subtitle in subtitles %}
-    <track kind="captions" src="{{ url_for('track', src=subtitle['path']) }}" label="{{ subtitle['name'] }}" {% if loop.first %}default{% endif %}>
+    <track kind="captions" src="{{ url_for('track', src=subtitle['path']) }}" label="{{ subtitle['name'] }}" {% if subtitle['default'] %}default{% endif %}>
     {% endfor %}
 </video>
 

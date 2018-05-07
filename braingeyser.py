@@ -57,13 +57,17 @@ def video(src):
     # Find subtitles
     # (we don't use glob because it does not work with '[' characters in the path name)
     subtitles = []
+    video_name = os.path.splitext(os.path.basename(src))[0]
     for subtitle in sorted(os.listdir(absolute_root)):
-        if os.path.splitext(subtitle)[1] not in Videos.SUPPORTED_SUBTITLES_EXTENSIONS:
+        subtitle_name, subtitle_ext = os.path.splitext(subtitle)
+        if subtitle_ext not in Videos.SUPPORTED_SUBTITLES_EXTENSIONS:
             continue
         subtitle_name = os.path.basename(subtitle)
+        is_default = video_name in subtitle_name
         subtitles.append({
             'name': subtitle_name,
-            'path': os.path.join(root, subtitle_name)
+            'path': os.path.join(root, subtitle_name),
+            'default': is_default,
         })
 
     return render_template('video.html', video=target, subtitles=subtitles)
