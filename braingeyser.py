@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 class Videos:
     ROOT_DIR = os.environ.get('VIDEO_ROOT_DIR', '/tmp')
-    SUPPORTED_EXTENSIONS = ['.mp4', '.mkv', '.avi']
+    SUPPORTED_EXTENSIONS = ['.mp4', '.avi']
     SUPPORTED_SUBTITLES_EXTENSIONS = ['.srt', '.vtt']
 
 
